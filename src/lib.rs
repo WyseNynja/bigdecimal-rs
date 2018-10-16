@@ -43,6 +43,9 @@
 extern crate num_bigint;
 extern crate num_integer;
 extern crate num_traits as traits;
+#[cfg(feature = "matrix")]
+#[macro_use]
+extern crate matrix;
 #[cfg(feature = "serde")]
 extern crate serde;
 
@@ -1448,6 +1451,27 @@ impl FromPrimitive for BigDecimal {
 impl ToBigInt for BigDecimal {
     fn to_bigint(&self) -> Option<BigInt> {
         Some(self.with_scale(0).int_val)
+    }
+}
+
+// Tools for matrix math
+#[cfg(feature = "matrix")]
+mod bigdecimal_matrix {
+    use super::BigDecimal;
+    use matrix::Element;
+
+
+    // 
+    impl Element for BigDecimal {
+        #[inline(always)]
+        fn is_zero(&self) -> bool {
+            *self == BigDecimal::zero()
+        }
+
+        #[inline(always)]
+        fn zero() -> Self {
+            BigDecimal::zero()
+        }
     }
 }
 
