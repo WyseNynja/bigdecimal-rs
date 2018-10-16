@@ -1460,8 +1460,8 @@ mod bigdecimal_matrix {
     use super::BigDecimal;
     use matrix::Element;
 
-
-    // 
+    // https://github.com/akubera/bigdecimal-rs/issues/48
+    // https://github.com/stainless-steel/matrix/issues/7
     impl Element for BigDecimal {
         #[inline(always)]
         fn is_zero(&self) -> bool {
